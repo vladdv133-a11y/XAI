@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="uk" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="t-title">XAI Client — Ultra-Fast Native AI Chat</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#202020',
+                        panelbg: '#2d2d2d',
+                        accent: '#4cc2ff',
+                        accentHover: '#64cdff'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .glass {
+            background: rgba(45, 45, 45, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-darkbg text-gray-100 min-h-screen flex flex-col selection:bg-accent selection:text-black">
+
+    <!-- Header / Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass border-b border-gray-800">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center font-bold text-darkbg text-lg shadow-lg shadow-accent/20">X</div>
+                <span class="text-xl font-semibold tracking-wide">XAI<span class="text-accent">ai</span></span>
+            </div>
+            
+            <nav class="hidden md:flex space-x-8 text-sm text-gray-300">
+                <a href="#features" class="hover:text-accent transition-colors" data-i18n="nav-features">Можливості</a>
+                <a href="#about" class="hover:text-accent transition-colors" data-i18n="nav-arch">Архітектура</a>
+                <a href="#download" class="hover:text-accent transition-colors" data-i18n="nav-download">Завантажити</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <!-- Language Selector -->
+                <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-panelbg border border-gray-700 text-gray-200 text-sm rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-accent cursor-pointer">
+                    <option value="uk" selected>🇺🇦 Українська</option>
+                    <option value="en">🇬🇧 English</option>
+                </select>
+
+                <a href="#download" class="bg-accent hover:bg-accentHover text-darkbg font-medium px-4 py-2 rounded-lg text-sm transition-all shadow-md shadow-accent/10 active:scale-95 hidden sm:inline-block" data-i18n="btn-download-top">
+                    Завантажити v1.0
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-6 max-w-6xl mx-auto flex flex-col items-center text-center flex-grow justify-center">
+        <div class="inline-flex items-center space-x-2 bg-panelbg border border-gray-700 px-4 py-1.5 rounded-full text-xs text-accent mb-6 shadow-inner">
+            <span class="w-2 h-2 rounded-full bg-accent animate-ping"></span>
+            <span data-i18n="hero-badge">Працює на базі Groq API &bull; Блискавична швидкість</span>
+        </div>
+        
+        <h1 class="text-4xl md:text-6xl font-bold tracking-tight max-w-3xl mb-6 leading-tight">
+            <span data-i18n="hero-title-1">Надзвичайно швидкий та легкий кліент штучного інтелекту для</span> <span class="text-accent">Windows</span>
+        </h1>
+        
+        <p class="text-gray-400 text-lg max-w-2xl mb-10" data-i18n="hero-desc">
+            Написаний на чистому C з використанням рідного Win32 API. Жодних зайвих бібліотек, миттєві відповіді, підтримка темної/світлої тем та автоматичне збереження історії чатів.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 w-full justify-center max-w-md">
+            <a href="XAI_Setup_v1.0.exe" class="bg-accent hover:bg-accentHover text-darkbg font-semibold px-8 py-3.5 rounded-xl transition-all shadow-lg shadow-accent/20 flex items-center justify-center space-x-2 text-base">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                <span data-i18n="btn-download-setup">Завантажити Setup (.exe)</span>
+            </a>
+            <a href="#features" class="bg-panelbg hover:bg-gray-700 border border-gray-700 text-gray-200 font-medium px-8 py-3.5 rounded-xl transition-all flex items-center justify-center" data-i18n="btn-learn-more">
+                Дізнатися більше
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-6 max-w-6xl mx-auto w-full">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold mb-3" data-i18n="features-heading">Чому саме XAI?</h2>
+            <p class="text-gray-400" data-i18n="features-sub">Розроблений для максимальної продуктивності та зручності</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Feature 1 -->
+            <div class="bg-panelbg border border-gray-800 p-8 rounded-2xl hover:border-gray-700 transition-all">
+                <div class="w-12 h-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center text-xl mb-6 font-bold">⚡</div>
+                <h3 class="text-xl font-semibold mb-3" data-i18n="feat-1-title">Максимальна швидкість</h3>
+                <p class="text-gray-400 text-sm leading-relaxed" data-i18n="feat-1-desc">Використання прямих WinHTTP запитів та найшвидших моделей через Groq API гарантує миттєву генерацію тексту без затримок.</p>
+            </div>
+            <!-- Feature 2 -->
+            <div class="bg-panelbg border border-gray-800 p-8 rounded-2xl hover:border-gray-700 transition-all">
+                <div class="w-12 h-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center text-xl mb-6 font-bold">💾</div>
+                <h3 class="text-xl font-semibold mb-3" data-i18n="feat-2-title">Автоматична історія</h3>
+                <p class="text-gray-400 text-sm leading-relaxed" data-i18n="feat-2-desc">Усі ваші розмови надійно та автоматично зберігаються в локальний файл історії, який відновлюється при кожному запуску.</p>
+            </div>
+            <!-- Feature 3 -->
+            <div class="bg-panelbg border border-gray-800 p-8 rounded-2xl hover:border-gray-700 transition-all">
+                <div class="w-12 h-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center text-xl mb-6 font-bold">🪟</div>
+                <h3 class="text-xl font-semibold mb-3" data-i18n="feat-3-title">Нативний Win32 UI</h3>
+                <p class="text-gray-400 text-sm leading-relaxed" data-i18n="feat-3-desc">Жодних важких веб-фреймворків чи Electron. Повністю нативний інтерфейс з підтримкою Fluent Design, темної теми та гарних шрифтів.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="py-20 px-6 max-w-4xl mx-auto w-full text-center">
+        <div class="bg-gradient-to-b from-panelbg to-gray-900 border border-gray-800 rounded-3xl p-12 shadow-2xl relative overflow-hidden">
+            <div class="absolute -right-20 -top-20 w-64 h-64 bg-accent/5 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <h2 class="text-3xl font-bold mb-4" data-i18n="down-heading">Готові спробувати XAI?</h2>
+            <p class="text-gray-400 mb-8 max-w-lg mx-auto" data-i18n="down-sub">Завантажте інсталятор програми та насолоджуйтеся швидким доступом до ШІ прямо на вашому ПК з Windows.</p>
+            
+            <a href="XAI_Setup_v1.0.exe" class="inline-flex items-center space-x-3 bg-accent hover:bg-accentHover text-darkbg font-semibold px-10 py-4 rounded-xl transition-all shadow-xl shadow-accent/20 text-lg">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                <span data-i18n="btn-download-big">Завантажити XAI_Setup_v1.0.exe</span>
+            </a>
+            <p class="text-xs text-gray-500 mt-4" data-i18n="down-note">Сумісно з Windows 10 / 11 (64-bit)</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 py-8 px-6 text-center text-sm text-gray-500">
+        <p data-i18n="footer-text">&copy; 2026 XAIai Project. Усі права захищені.</p>
+    </footer>
+
+    <!-- Localization Script -->
+    <script>
+        const translations = {
+            uk: {
+                "nav-features": "Можливості",
+                "nav-arch": "Архітектура",
+                "nav-download": "Завантажити",
+                "btn-download-top": "Завантажити v1.0",
+                "hero-badge": "Працює на базі Groq API • Блискавична швидкість",
+                "hero-title-1": "Надзвичайно швидкий та легкий кліент штучного інтелекту для",
+                "hero-desc": "Написаний на чистому C з використанням рідного Win32 API. Жодних зайвих бібліотек, миттєві відповіді, підтримка темної/світлої тем та автоматичне збереження історії чатів.",
+                "btn-download-setup": "Завантажити Setup (.exe)",
+                "btn-learn-more": "Дізнатися більше",
+                "features-heading": "Чому саме XAI?",
+                "features-sub": "Розроблений для максимальної продуктивності та зручності",
+                "feat-1-title": "Максимальна швидкість",
+                "feat-1-desc": "Використання прямих WinHTTP запитів та найшвидших моделей через Groq API гарантує миттєву генерацію тексту без затримок.",
+                "feat-2-title": "Автоматична історія",
+                "feat-2-desc": "Усі ваші розмови надійно та автоматично зберігаються в локальний файл історії, який відновлюється при кожному запуску.",
+                "feat-3-title": "Нативний Win32 UI",
+                "feat-3-desc": "Жодних важких веб-фреймворків чи Electron. Повністю нативний інтерфейс з підтримкою Fluent Design, темної теми та гарних шрифтів.",
+                "down-heading": "Готові спробувати XAI?",
+                "down-sub": "Завантажте інсталятор програми та насолоджуйтеся швидким доступом до ШІ прямо на вашому ПК з Windows.",
+                "btn-download-big": "Завантажити XAI_Setup_v1.0.exe",
+                "down-note": "Сумісно з Windows 10 / 11 (64-bit)",
+                "footer-text": "© 2026 XAIai Project. Усі права захищені."
+            },
+            en: {
+                "nav-features": "Features",
+                "nav-arch": "Architecture",
+                "nav-download": "Download",
+                "btn-download-top": "Download v1.0",
+                "hero-badge": "Powered by Groq API • Blazing Fast",
+                "hero-title-1": "Extremely fast and lightweight native AI client for",
+                "hero-desc": "Written in pure C using the native Win32 API. No bloatware, instant responses, dark/light theme support, and automatic chat history saving.",
+                "btn-download-setup": "Download Setup (.exe)",
+                "btn-learn-more": "Learn More",
+                "features-heading": "Why Choose XAI?",
+                "features-sub": "Engineered for maximum performance and convenience",
+                "feat-1-title": "Blazing Speed",
+                "feat-1-desc": "Using direct WinHTTP requests and the fastest models via Groq API guarantees instant text generation without delays.",
+                "feat-2-title": "Auto History",
+                "feat-2-desc": "All your conversations are securely and automatically saved to a local history file that restores on every startup.",
+                "feat-3-title": "Native Win32 UI",
+                "feat-3-desc": "No heavy web frameworks or Electron. A completely native interface with Fluent Design, dark theme, and crisp typography.",
+                "down-heading": "Ready to try XAI?",
+                "down-sub": "Download the installer and enjoy quick access to AI right on your Windows PC.",
+                "btn-download-big": "Download XAI_Setup_v1.0.exe",
+                "down-note": "Compatible with Windows 10 / 11 (64-bit)",
+                "footer-text": "© 2026 XAIai Project. All rights reserved."
+            }
+        };
+
+        function changeLanguage(lang) {
+            document.documentElement.lang = lang;
+            const elements = document.querySelectorAll("[data-i18n]");
+            elements.forEach(el => {
+                const key = el.getAttribute("data-i18n");
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+            localStorage.setItem("xai_lang", lang);
+        }
+
+        // Завантаження збереженої мови при відкритті
+        window.addEventListener("DOMContentLoaded", () => {
+            const savedLang = localStorage.getItem("xai_lang") || "uk";
+            document.getElementById("langSelect").value = savedLang;
+            changeLanguage(savedLang);
+        });
+    </script>
+</body>
+</html>
